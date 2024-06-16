@@ -1,0 +1,60 @@
+{
+  "name": "@zodactive-form/svelte",
+  "description": "Svelte wrapper for @zodactive-form/core",
+  "version": "0.0.0",
+  "author": "CedSharp <cedascsharp@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ced-Sharp/zodactive-form-svelte.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "dist/zodactive-form-svelte.umd.js",
+  "module": "dist/zodactive-form-svelte.js",
+  "types": "dist/zodactive-form-svelte.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/zodactive-form-svelte.js",
+      "require": "./dist/zodactive-form-svelte.umd.js",
+      "types": "./dist/zodactive-form-svelte.d.ts"
+    }
+  },
+  "scripts": {
+    "prebuild": "rimraf dist && rimraf types && npm run lint && npm run test",
+    "build": "vite build && npm run build:types && npm run minify",
+    "build:types": "tsc && rollup -c && bash setup-types.sh",
+    "lint": "svelte-check --tsconfig ./tsconfig.json && biome check src",
+    "minify": "esbuild dist/zodactive-form-svelte.js --minify --outfile=dist/zodactive-form-svelte.js --allow-overwrite",
+    "prepublishOnly": "npm run build && cp src/*.d.ts dist/",
+    "test": "vitest --run"
+  },
+  "peerDependencies": {
+    "svelte": "^4.2.12",
+    "svelte-check": "^3.6.7",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "zod": "^3.23.8"
+  },
+  "dependencies": {
+    "@zodactive-form/core": "^0.1.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.1",
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/svelte": "^5.1.0",
+    "@tsconfig/svelte": "^5.0.2",
+    "@types/node": "^20.14.2",
+    "esbuild": "^0.21.5",
+    "jsdom": "^24.1.0",
+    "rimraf": "^5.0.7",
+    "rollup": "^4.18.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "sveld": "^0.20.0",
+    "vitest": "^1.6.0"
+  },
+  "packageManager": "pnpm@9.1.1+sha512.14e915759c11f77eac07faba4d019c193ec8637229e62ec99eefb7cf3c3b75c64447882b7c485142451ee3a6b408059cdfb7b7fa0341b975f12d0f7629c71195"
+}

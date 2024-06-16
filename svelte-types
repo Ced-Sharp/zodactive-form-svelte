@@ -1,0 +1,58 @@
+import { SvelteComponentTyped } from "svelte";
+
+declare module '@zodactive-form/svelte/index.ts' {
+	export { useForm } from "./zodactive-svelte";
+	export { default as ZForm } from "./z-form.svelte";
+	export { default as ZFormField } from "./z-form-field.svelte";
+}
+
+declare module '@zodactive-form/svelte/zodactive-svelte.ts' {
+	/// <reference types="svelte" />
+	import type { FormFields, Obj, ObjEffect } from "@zodactive-form/core";
+	import { type Writable } from "svelte/store";
+	import type { z } from "zod";
+	export const useForm: <S extends Obj | ObjEffect>(schema: S, initialData?: z.TypeOf<S>) => {
+	    assign: (path: string | string[], value: unknown) => void;
+	    clear: () => void;
+	    clearErrors: () => void;
+	    validate: () => boolean;
+	    toJson: () => z.TypeOf<S>;
+	    getFieldByPath: (path: string[]) => Record<string, unknown>;
+	    form: Writable<FormFields<z.TypeOf<S>>>;
+	    formErrors: Writable<string[]>;
+	    valid: Writable<boolean>;
+	};
+}
+
+declare module '@zodactive-form/svelte/z-form-field.svelte' {
+	interface z-form-fieldProps {
+		id: any;
+		className: any;
+		name: any;
+		label: any;
+		type: HTMLInputElement["type"];
+		path: string | string[];
+	}
+
+	export default class z-form-field extends SvelteComponentTyped<
+		z-form-fieldProps,
+		{  },
+		{ name: any, label: any, name: any, id: any, class: any, type: any, inputName: any, value: any, name: any, error: any }
+	> {}
+}
+
+declare module '@zodactive-form/svelte' {
+	interface z-formProps {
+		id: any;
+		className: any;
+		hideErrors: any;
+		form: ReturnType<typeof useForm>;
+	}
+
+	export default class z-form extends SvelteComponentTyped<
+		z-formProps,
+		{  },
+		{ name: any, errors: any, name: any }
+	> {}
+}
+
