@@ -1,7 +1,7 @@
 {
   "name": "@zodactive-form/svelte",
   "description": "Svelte wrapper for @zodactive-form/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "CedSharp <cedascsharp@gmail.com>",
   "repository": {
     "type": "git",
