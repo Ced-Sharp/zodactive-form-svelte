@@ -1,8 +1,13 @@
 [npm]: https://img.shields.io/npm/v/@zodactive-form/svelte
+
 [npm-url]: https://www.npmjs.com/package/@zodactive-form/svelte
+
 [size]: https://packagephobia.now.sh/badge?p=@zodactive-form/svelte
+
 [size-url]: https://packagephobia.now.sh/result?p=@zodactive-form/svelte
+
 [libera]: https://img.shields.io/badge/libera-manifesto-lightgrey.svg
+
 [libera-url]: https://liberamanifesto.com
 
 <h1 align="center">Zodactive Form</h1>
@@ -27,20 +32,22 @@ supported yet.
 
 ## Description
 
-This Svelte library is a wrapper on top of [@zodactive-form/core](https://npmjs.com/package/@zodactive-form/core) 
+This Svelte library is a wrapper on top of [@zodactive-form/core](https://npmjs.com/package/@zodactive-form/core)
 and provides components to quickly get started with reactive forms validated with Zod.
 
 It provides the following:
- - `useForm(zodSchema)`: A wrapper around `useZodactiveForm()` which uses `writable()` for reactivity;
- - `ZForm`: A simple form component which emits `on:submit` only when submitting while the form is valid;
- - `ZFormField`: A simple wrapper around `<input>` which is connected to the `useForm()` and will reactively show errors; 
+
+- `useForm(zodSchema)`: A wrapper around `useZodactiveForm()` which uses `writable()` for reactivity;
+- `ZForm`: A simple form component which emits `on:submit` only when submitting while the form is valid;
+- `ZFormField`: A simple wrapper around `<input>` which is connected to the `useForm()` and will reactively show errors;
 
 ## Dependencies
 
 @zodactive-form/vue has the following dependencies:
- - [Zod](https://npmjs.com/package/zod): The validation library used by the zodactive-form family;
- - [Svelte](https://svelte.dev/): The reactive ui framework which this package wraps around;
- - [@zodactive-form/core](https://npmjs.com/package/@zodactive-form/core): Contains the main form validation logic;
+
+- [Zod](https://npmjs.com/package/zod): The validation library used by the zodactive-form family;
+- [Svelte](https://svelte.dev/): The reactive ui framework which this package wraps around;
+- [@zodactive-form/core](https://npmjs.com/package/@zodactive-form/core): Contains the main form validation logic;
 
 ## Installation
 
@@ -105,7 +112,7 @@ The names are a little confusing and will most probably be changed in the future
   }
 </script>
 
-<ZForm :form="form" @submit="onSubmit">
+<ZForm :form="form" on:submit="onSubmit">
   <z-form-field label="Username" path="username" />
   <z-form-field label="Password" path="password" />
   <z-form-field label="Confirm Password" path="confirmPassword" />
@@ -115,6 +122,7 @@ The names are a little confusing and will most probably be changed in the future
 The provided `<ZForm>` is mostly equivalent to `<form><slot /></form>`;
 
 The provided `<ZFormField>` has the following default output:
+
 ```svelte
 <template>
   <label>
@@ -129,15 +137,15 @@ The provided `<ZFormField>` has the following default output:
 
 ### Additional Details
 
- - `form.form`, the `writable()`, contains a structure with both values and errors. 
-The nested values are *NOT REACTIVE*. To update the form programmatically it is necessary to set `form.form.value` 
-directly. This is what `assign()` does, and it is the recommended way to update the form.
- - The form is validated on creation, but errors are ignored. This is to set the `valid` property based on
-the initial data provided to the form;
- - When calling `validate()`, all errors are removed. If errors need to be removed at a different time,
-please use `clearErrors()`;
- - The `submit` event of `ZForm` internally calls `event.preventDefault()`. In addition, it will only be emitted
-when the form is valid. If there are errors, it will not be emitted.
+- `form.form`, the `writable()`, contains a structure with both values and errors.
+  The nested values are *NOT REACTIVE*. To update the form programmatically it is necessary to set `form.form.value`
+  directly. This is what `assign()` does, and it is the recommended way to update the form.
+- The form is validated on creation, but errors are ignored. This is to set the `valid` property based on
+  the initial data provided to the form;
+- When calling `validate()`, all errors are removed. If errors need to be removed at a different time,
+  please use `clearErrors()`;
+- The `submit` event of `ZForm` internally calls `event.preventDefault()`. In addition, it will only be emitted
+  when the form is valid. If there are errors, it will not be emitted.
 
 ## License
 
